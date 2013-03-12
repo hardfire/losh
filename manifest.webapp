@@ -1,0 +1,16 @@
+{
+	"name": "LoadShedding Details for Nepal",
+	"description": "Know when the light's off",
+	"launch_path": "~avk/losa/index.html",
+	"icons": {
+		"128": "/img/icon-128.png"
+	},
+	"developer": {
+		"name": "Some Random Name",
+		"url": "http://avinash.com.np"
+	},
+	"default_locale": "en",
+	"permissions":{
+		"systemXHR": {}
+	}
+}
