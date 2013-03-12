@@ -1,6 +1,7 @@
 {
 	"name": "LoadShedding",
 	"description": "LoadShedding Details for Nepal : Know when the light's off",
+	"launch_path": "/losh/",
 	"icons": {
 		"128": "/losh/img/icon-128.png",
 		"60": "/losh/img/icon-60.png"
