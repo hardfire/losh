@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version 1.1
+# Version 1.2
 
 index.html
 js/underscore.js
@@ -10,6 +10,7 @@ shared/style_unstable/toolbars.css
 shared/style/headers.css
 shared/style_unstable/drawer.css
 shared/style_unstable/lists.css
+shared/style/status.css
 NETWORK:
 *
 
@@ -25,3 +26,4 @@ shared/style_unstable/drawer/images/ui/separator.png
 shared/style_unstable/drawer/images/ui/shadow_header.png
 shared/style_unstable/drawer/images/ui/pattern_subheader.png
 shared/style_unstable/drawer/images/ui/shadow.png
+home.png
