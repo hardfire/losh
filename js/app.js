@@ -7,6 +7,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	var current = localStorage.getItem('current');
 	if(current == null)
 	{
+		localStorage.setItem('current','1');
 		current = '1';
 	}
 	if(schedule == null)
