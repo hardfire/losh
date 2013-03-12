@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# Version 1.5
+# Version 1.81
 
+CACHE:
 index.html
 js/underscore.js
 js/moment.min.js
@@ -11,10 +12,6 @@ shared/style/headers.css
 shared/style_unstable/drawer.css
 shared/style_unstable/lists.css
 shared/style/status.css
-NETWORK:
-*
-
-CACHE:
 shared/style/headers/images/ui/header.png
 shared/style/headers/images/ui/negative.png
 shared/style/headers/images/ui/shadow.png
@@ -27,3 +24,6 @@ shared/style_unstable/drawer/images/ui/shadow_header.png
 shared/style_unstable/drawer/images/ui/pattern_subheader.png
 shared/style_unstable/drawer/images/ui/shadow.png
 home.png
+
+NETWORK:
+*

@@ -5,6 +5,9 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	//check if data is available in localStorage
 	var schedule = localStorage.getItem('schedule');
 	var current = localStorage.getItem('current');
+	var lastUpdated = localStorage.getItem('lastUpdated');
+
+	var updateTime = 86400; //a day
 	if(current == null)
 	{
 		localStorage.setItem('current','1');
@@ -12,13 +15,17 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	}
 	if(schedule == null)
 	{
-		console.log('getting the data from the server');
 		updateSchedule();
 	} else {
 		$scope.schedule = JSON.parse(schedule);
 		$scope.current = $scope.schedule[current];
 		$scope.currentGroupNumber = current;
 		updateTick();
+		var now = new Date().getTime()/1000;
+		if((now-lastUpdated) > updateTime || lastUpdated==null)
+		{
+			updateSchedule();
+		}
 	}
 
 	//update the status of loadshedding
@@ -135,6 +142,8 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 			$scope.currentGroupNumber = '1';
 
 			localStorage.setItem('schedule',JSON.stringify(schedule));
+			var lastUpdateTime = new Date().getTime()/1000;
+			localStorage.setItem('lastUpdated',lastUpdateTime);
 			updateTick();
 
 			$scope.notification = {
