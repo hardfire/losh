@@ -3,8 +3,8 @@
 	"description": "LoadShedding Details for Nepal : Know when the light's off",
 	"launch_path": "/losh/",
 	"icons": {
-		"128": "/img/icon-128.png",
-		"60": "/img/icon-60.png"
+		"128": "img/icon-128.png",
+		"60": "img/icon-60.png"
 	},
 	"developer": {
 		"name": "Avinash Kundaliya",
