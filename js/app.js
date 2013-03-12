@@ -94,7 +94,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 
 			var current = 1;
 
-			_.each(doc.getElementsByTagName('results')[0].children,function(el){
+			_.each(doc.getElementsByTagName('RESULTS')[0].children,function(el){
 
 				if(schedule[el.children[0].innerHTML] == undefined)
 				{
@@ -146,3 +146,4 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 		});
 	}
 }
+
