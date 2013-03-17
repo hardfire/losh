@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html manifest="manifest.appcache" ng-app>
+<!--html ng-app-->
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="pragma" content="no-cache">
@@ -10,6 +11,10 @@
 		<link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css">
 		<link rel="stylesheet" type="text/css" href="shared/style/action_menu.css">
 		<link rel="stylesheet" type="text/css" href="shared/style/status.css">
+
+		<script type="text/javascript" charset="utf-8">
+			applicationCache.update();
+		</script>
 		
 		<title> Load Shedding App </title>
 		<style>
@@ -46,11 +51,11 @@
 				padding: 0;
 			}
 			[data-type="list"] li:hover{
-				background-color:#B1F1FF;
+				background-color:rgba(177, 241, 255, 0.6);
 			}
 			[data-type="list"] li.today{
 				/*background:#ffead4;*/
-				background-color:#eee;
+				background-color:rgba(200,200,200,0.3);
 				border-bottom:0.3rem solid #00ABCC;
 				height:6.2rem;
 				font-weight:bold;
@@ -107,41 +112,64 @@
 				border:5px solid #333;
 				border-radius:170px;
 				position:absolute;
-				z-index:1001;
 				top:50%;
 				left:50%;
 				margin-left:-150px;
 				margin-top:-150px;
-				opacity:0.1
+				opacity:0.2;
 			}
 			#dot{
-				width:15px;
-				height:15px;
-				background:#222;
+				width:60px;
+				height:60px;
+				background:#ddd;
 				position:absolute;
 				top:50%;
 				left:50%;
-				margin:-10px 0 0 -10px;
-				border-radius:15px;
-				border:5px solid #fff;
-				z-index:1;
+				margin:-30px 0 0 -30px;
+				border-radius:60px;
+				z-index:1003;
 			}
 			#hour,#minute,#second{
 				width:120px;
 				height:10px;
 				background:#333;
 				position:absolute;
+				z-index:1002;
+				transform-origin:0 0;
 				top:150px;
 				left:150px;
-				transform-origin:0 0;
 			}
 			#minute{
 				height:5px;
 				width:130px;
+				top:150px;
+				left:150px;
 			}
 			#second{
 				height:2px;
 				width:140px;
+				top:150px;
+				left:150px;
+			}
+			.shedding{
+				width:300px;
+				height:300px;
+				border-radius:170px;
+				position:absolute;
+				z-index:1;
+				top:50%;
+				left:50%;
+				margin-left:-150px;
+				margin-top:-150px;
+				clip:rect(0px, 150px, 300px, 0px);
+			}
+			.shedding .clip{
+				width:300px;
+				height:300px;
+				background:#00ABCC;
+				border-radius:170px;
+				position:absolute;
+				clip:rect(0px, 300px, 150px, 0px);
 			}
 		</style>
 		<script type="text/javascript" charset="utf-8" src="js/underscore.js"> </script>
@@ -150,15 +178,6 @@
 		<script type="text/javascript" charset="utf-8" src="js/app.js"> </script>
 	</head>
 	<body ng-controller="mainCtrl">
-		<div id="clock">
-			<div id="dot"></div>
-			<div id="hour" style="transform:rotate({{(currentTime.hours * 30) - 90}}deg);"></div>
-			<div id="minute" style="transform:rotate({{(currentTime.minutes * 6) - 90}}deg);"></div>
-			<div id="second" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);"></div>
-			<div id="shedding">
-				<div class="clip"></div>
-			</div>
-		</div>
 
 		<section role="status" ng-show="notification.status" ng-click="hideNotify()"> <p ng-bind-html-unsafe="notification.message"></p> </section>
 
@@ -184,7 +203,6 @@
 				</a>
 			</div>
 		</section>
-
 		<section id="drawer" role="region">
 			<header>
 				<a href="#"><span class="icon icon-menu">hide sidebar</span></a>
@@ -201,7 +219,18 @@
 					</li>
 				</ul>
 				</section>
+				<div id="clock">
+					<div id="dot"></div>
+					<div id="hour" style="transform:rotate({{(currentTime.hours * 30) - 90}}deg);"></div>
+					<div id="minute" style="transform:rotate({{(currentTime.minutes * 6) - 90}}deg);"></div>
+					<div id="second" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);"></div>
+					<div class="shedding" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);">
+						<div class="clip" style=""></div>
+					</div>
+				</div>
 			</div>
 		</section>
+
+
 	</body>
 </html>

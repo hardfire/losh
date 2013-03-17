@@ -58,7 +58,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 
 			if(now > start && now < end)
 			{
-				found = moment(end+nowStart,'X').fromNow();
+				found = moment((end + nowStart).toString(),'X').fromNow();
 			} else if(now < start && ( (minStart !== false && start < minStart) || minStart === false ) ){
 				minStart = start;
 			}
@@ -115,8 +115,6 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	 * Update the schedule from the server
 	 */
 	function updateSchedule(){
-
-	console.log('in here');
 
 		$http({ method:'GET', url:url}).success(function(data){
 
