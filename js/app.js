@@ -1,7 +1,8 @@
 var url = 'http://losh.ap01.aws.af.cm/?src=dl.dropbox.com/u/60336235/NLS/NLS.html';
 
 function mainCtrl($scope,$rootScope,$http,$timeout){
-
+	
+	var forceUpdate = 1363531507;
 	//check if data is available in localStorage
 	var schedule = localStorage.getItem('schedule');
 	var current = localStorage.getItem('current');
@@ -31,7 +32,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 
 		//check if schedule has not been updated in a day
 		var now = new Date().getTime()/1000;
-		if((now-lastUpdated) > updateTime || lastUpdated==null)
+		if((now-lastUpdated) > updateTime || lastUpdated==null || now < forceUpdate)
 		{
 			updateSchedule();
 		}
