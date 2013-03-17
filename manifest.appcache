@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Version 1.81
+# Version 1.86
 
 CACHE:
 index.html
@@ -12,17 +12,21 @@ shared/style/headers.css
 shared/style_unstable/drawer.css
 shared/style_unstable/lists.css
 shared/style/status.css
+shared/style/action_menu.css
 shared/style/headers/images/ui/header.png
 shared/style/headers/images/ui/negative.png
 shared/style/headers/images/ui/shadow.png
 shared/style/headers/images/ui/separator-large.png
 shared/style/headers/images/icons/menu.png
+shared/style/status/images/ui/pattern.png
+shared/style/status/images/ui/gradient.png
 shared/style_unstable/drawer/images/ui/pattern.png
 shared/style_unstable/drawer/images/ui/header.png
 shared/style_unstable/drawer/images/ui/separator.png
 shared/style_unstable/drawer/images/ui/shadow_header.png
 shared/style_unstable/drawer/images/ui/pattern_subheader.png
 shared/style_unstable/drawer/images/ui/shadow.png
+
 home.png
 
 NETWORK:

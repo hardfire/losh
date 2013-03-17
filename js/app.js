@@ -8,55 +8,81 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	var lastUpdated = localStorage.getItem('lastUpdated');
 
 	var updateTime = 86400; //a day
+
+	//if default group is not set, set as 1
 	if(current == null)
 	{
 		localStorage.setItem('current','1');
 		current = '1';
 	}
+
+	//if the schedule is not found in localstorage
 	if(schedule == null)
 	{
 		updateSchedule();
 	} else {
+
+		//get the schedule and deafult group from storage
 		$scope.schedule = JSON.parse(schedule);
 		$scope.current = $scope.schedule[current];
 		$scope.currentGroupNumber = current;
+
 		updateTick();
+
+		//check if schedule has not been updated in a day
 		var now = new Date().getTime()/1000;
 		if((now-lastUpdated) > updateTime || lastUpdated==null)
 		{
 			updateSchedule();
 		}
+		
 	}
+
 
 	//update the status of loadshedding
 	function updateTick(){
+
 		var date = new Date(),
-		day = date.getDay(),
-		now = moment().format('X'),
-		found = false,
-		minStart = false,
-		today = $scope.schedule[$scope.currentGroupNumber][day];
+			day = date.getDay(),
+			nowStart = parseInt(moment().startOf('day').format('X'));
+			now = moment().format('X') - nowStart,
+			found = false,
+			minStart = false,
+			today = $scope.schedule[$scope.currentGroupNumber][day];
+
 
 		for(var item in today['timing']){
-
+			
 			var start = today['timing'][item][0].timestamp,
 			end = today['timing'][item][1].timestamp;
 
 			if(now > start && now < end)
 			{
-				found = moment(end,'X').fromNow();
+				found = moment(end+nowStart,'X').fromNow();
 			} else if(now < start && ( (minStart !== false && start < minStart) || minStart === false ) ){
 				minStart = start;
 			}
+
 		}
 
 		if(found !== false)
-			$scope.status = 'End ' + found;
+			$scope.status = 'Ends ' + found;
 		else if(minStart !== false){
-			$scope.status='Begin ' + moment(minStart,'X').fromNow();
+			$scope.status='Begins ' + moment((minStart+nowStart).toString(),'X').fromNow();
 		} else {
 			$scope.status ="Done for the day! yay!";
 		}
+
+
+		//update the current time
+		$scope.currentTime = {
+			hours:parseInt(moment().format('h')) + moment().format('m')/60,
+			minutes:moment().format('m'),
+			seconds:moment().format('s'),
+			day:day
+		}
+
+
 		$scope.tickPromise = $timeout(updateTick,1000);
 	};
 
@@ -84,9 +110,13 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 		$scope.notification=null;
 	}
 
-	//update the schedule from the server
 
+	/*
+	 * Update the schedule from the server
+	 */
 	function updateSchedule(){
+
+	console.log('in here');
 
 		$http({ method:'GET', url:url}).success(function(data){
 
@@ -119,7 +149,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 						timeMoment = moment().startOf('day').add({hours:timeArray[0],minutes:timeArray[1]});
 						newTime.push({
 							formatted : timeMoment.format('hh:mm a'),
-							timestamp : timeMoment.format('X')
+							timestamp : timeMoment.format('X') - moment().startOf('day').format('X')
 						});
 					}
 					timing[i] = newTime;
