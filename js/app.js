@@ -32,7 +32,7 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 
 		//check if schedule has not been updated in a day
 		var now = new Date().getTime()/1000;
-		if((now-lastUpdated) > updateTime || lastUpdated==null || lastUpdated < forceUpdate)
+		if((now-lastUpdated) > updateTime || lastUpdated == null || lastUpdated < forceUpdate)
 		{
 			updateSchedule();
 		}
