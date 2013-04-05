@@ -1,4 +1,5 @@
-var url = 'http://losh.ap01.aws.af.cm/?src=dl.dropbox.com/u/60336235/NLS/NLS.html';
+var url = 'http://dl.dropbox.com/u/60336235/NLS/NLS.html';
+//var url = 'http://losh-timing.ap01.aws.af.cm/';
 
 function mainCtrl($scope,$rootScope,$http,$timeout){
 	
@@ -116,9 +117,9 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 	 * Update the schedule from the server
 	 */
 	function updateSchedule(){
-
-		$http({ method:'GET', url:url}).success(function(data){
-
+		
+		$http.defaults.useXDomain = true;
+		$http.get(url).success(function(data){
 			data = data.replace(/Wednesda/g,'Wednesday'); 
 
 			var parser = new DOMParser(),
@@ -181,6 +182,10 @@ function mainCtrl($scope,$rootScope,$http,$timeout){
 			}
 			$timeout($scope.hideNotify,4000);
 
+		}).error(function(data, status, headers, config) {
+			alert('Cannot download latest schedule, please try again in some time');
+		  // called asynchronously if an error occurs
+		  // or server returns response with an error status.
 		});
 	}
 }
