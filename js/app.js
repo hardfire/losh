@@ -1,4 +1,4 @@
-var url = 'http://dl.dropbox.com/u/60336235/NLS/NLS.html';
+var url = 'http://dl.dropboxusercontent.com/u/60336235/NLS/NLS.html';
 //var url = 'http://losh-timing.ap01.aws.af.cm/';
 
 function mainCtrl($scope,$rootScope,$http,$timeout){
