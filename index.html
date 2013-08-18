@@ -1,235 +1,83 @@
 <!DOCTYPE html>
-<html manifest="manifest.appcache" ng-app>
-<!--html ng-app-->
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="pragma" content="no-cache">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="shared/style_unstable/toolbars.css">
-		<link rel="stylesheet" type="text/css" href="shared/style/headers.css">
-		<link rel="stylesheet" type="text/css" href="shared/style_unstable/drawer.css">
-		<link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css">
-		<link rel="stylesheet" type="text/css" href="shared/style/action_menu.css">
-		<link rel="stylesheet" type="text/css" href="shared/style/status.css">
-		
-		<title> Load Shedding App </title>
-		<style>
-			body{ margin:0px; }
-			html, body {
-				margin: 0;
-				padding: 0;
-				font-size: 10px;
-				background-color: #fff;
-				height: 100%;
-				overflow-x: hidden;
-			}
-			section[role="region"] {
-				height: 100%;
-				font: 2.2rem/1em "Open Sans", Sans-serif;
-			}
-			section[role="region"] h1{
-				padding-top:2px;
-			}
-			div[role="main"] {
-				background:#fff;
-				min-height: -moz-calc(100% - 5rem);
-			}
-			div[role="main"] > p {
-				margin: 2rem 2.5rem;
-			}
-			#drawer > header > a{
-				padding-left:10px;
-			}
-			#drawer a[href="#drawer"]{
-				padding-left:10px;
-			}
-			[data-type="list"] {
-				padding: 0;
-			}
-			[data-type="list"] li:hover{
-				background-color:rgba(177, 241, 255, 0.6);
-			}
-			[data-type="list"] li.today{
-				/*background:#ffead4;*/
-				background-color:rgba(200,200,200,0.3);
-				border-bottom:0.3rem solid #00ABCC;
-				height:6.2rem;
-				font-weight:bold;
-			}
-			.day,.times{
-				display:inline-block;
-				font-size:1.3rem;
-				max-height:59px;
-				margin:0.8rem 1rem 0 1rem;
-				vertical-align:middle;
-			}
-			.day{
-				width:90px;
-				font-size:1.8rem;
-				overflow:hidden;
-				color:#555;
-				margin-top:1.5rem;
-				width:100px;
-			}
-			
-			.times{
-				position:absolute;
-				right:0;
-			}
-			.status{
-				background:none repeat scroll 0 0 #00ABCC;
-				color:#fff;
-				font-size:1.3rem;
-				padding:0.2rem 1rem;
-			}
-			[data-type="list"] ul{
-        overflow:auto;
-      }
-			[data-type="list"] li{
-				height:5.7rem;
-			}
-			[data-type="sidebar"] li.active{
-				background:none repeat scroll 0 0 #00ABCC;
-			}
-			header:first-child .icon.icon-home {
-				background:url('home.png') no-repeat center center;
-			}
-			#defaultGroup{
-				color:#fff;
-				text-decoration:none;
-				text-align:center;
-				font-size:1.4rem;
-				margin-top:1rem;
-			}
-			section[role="status"]{
-				z-index:101;
-				opacity:0.9;
-			}
-			#clock{
-				width:300px;
-				height:300px;
-				border:5px solid #333;
-				border-radius:170px;
-				position:absolute;
-				top:50%;
-				left:50%;
-				margin-left:-150px;
-				margin-top:-150px;
-				opacity:0.2;
-			}
-			#dot{
-				width:60px;
-				height:60px;
-				background:#ddd;
-				position:absolute;
-				top:50%;
-				left:50%;
-				margin:-30px 0 0 -30px;
-				border-radius:60px;
-				z-index:1003;
-			}
-			#hour,#minute,#second{
-				width:120px;
-				height:10px;
-				background:#333;
-				position:absolute;
-				z-index:1002;
-				transform-origin:0 0;
-				top:150px;
-				left:150px;
-			}
-			#minute{
-				height:5px;
-				width:130px;
-				top:150px;
-				left:150px;
-			}
-			#second{
-				height:2px;
-				width:140px;
-				top:150px;
-				left:150px;
-			}
-			.shedding{
-				width:300px;
-				height:300px;
-				border-radius:170px;
-				position:absolute;
-				z-index:1;
-				top:50%;
-				left:50%;
-				margin-left:-150px;
-				margin-top:-150px;
-				clip:rect(0px, 150px, 300px, 0px);
-			}
-			.shedding .clip{
-				width:300px;
-				height:300px;
-				background:#00ABCC;
-				border-radius:170px;
-				position:absolute;
-				clip:rect(0px, 300px, 150px, 0px);
-			}
-		</style>
-		<script type="text/javascript" charset="utf-8" src="js/underscore.js"> </script>
-		<script type="text/javascript" charset="utf-8" src="js/moment.min.js"> </script>
-		<script type="text/javascript" charset="utf-8" src="js/angular.min.js"> </script>
-		<script type="text/javascript" charset="utf-8" src="js/app.js"> </script>
-	</head>
-	<body ng-controller="mainCtrl">
+<!--html manifest="manifest.appcache" ng-app-->
+<html ng-app>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Load Shedding App </title>
 
-		<section role="status" ng-show="notification.status" ng-click="hideNotify()"> <p ng-bind-html-unsafe="notification.message"></p> </section>
+    <link rel="stylesheet" type="text/css" href="shared/style_unstable/toolbars.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/headers.css">
+    <link rel="stylesheet" type="text/css" href="shared/style_unstable/drawer.css">
+    <link rel="stylesheet" type="text/css" href="shared/style_unstable/lists.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/action_menu.css">
+    <link rel="stylesheet" type="text/css" href="shared/style/status.css">
+    <link rel="stylesheet" type="text/css" href="util.css">
+    <link rel="stylesheet" type="text/css" href="app.css">
+    <script type="text/javascript" charset="utf-8" src="shared/js/gesture_detector.js"></script>
+    <script type="text/javascript" charset="utf-8" src="shared/js/mouse_event_shim.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/underscore.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="js/moment.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="js/angular.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"> </script>
+  </head>
+  <body ng-controller="mainCtrl">
 
-		<section data-type="sidebar">
-		<header>
-		<menu type="toolbar">
-			<a href="#"><span class="icon icon-home" ng-click="changeGroup()">home</span></a>
-			</menu>
-		<h1>Change Group</h1>
-		</header>
-			<nav>
-				<ul>
-					<li ng-repeat="(num,group) in schedule" ng-click="changeGroup(num)" ng-class="{'active': num == currentGroupNumber}"> 
-						<a href="#">Group {{num}}</a> 
-					</li>
-				</ul>
-			</nav>
-			<div role="toolbar"> 
-				<a href="#">
-					<div id="defaultGroup" ng-click="setDefaultGroup()">
-						Set current as Default Group 
-					</div>
-				</a>
-			</div>
-		</section>
-		<section id="drawer" role="region">
-			<header>
-				<a href="#"><span class="icon icon-menu">hide sidebar</span></a>
-				<a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
-				<h1>Timings - Group {{currentGroupNumber}}  </h1>
-			</header>
-			<div role="main">
-				<section data-type="list">
-				<div class="status"> LoadShedding Status : {{status}} </div>
-				<ul>
-					<li ng-repeat="(num,times) in current" ng-class="{'today': num == currentTime.day}">
-						<div class="day"><strong>{{times.day}}</strong></div>
-						<div class="times"> <span ng-repeat="time in times.timing"> {{time[0].formatted}} - {{time[1].formatted}} <br  /></span></div>
-					</li>
-				</ul>
-				</section>
-				<!--div id="clock">
-					<div id="dot"></div>
-					<div id="hour" style="transform:rotate({{(currentTime.hours * 30) - 90}}deg);"></div>
-					<div id="minute" style="transform:rotate({{(currentTime.minutes * 6) - 90}}deg);"></div>
-					<div id="second" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);"></div>
-					<div class="shedding" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);">
-						<div class="clip" style=""></div>
-					</div>
-				</div-->
-			</div>
-		</section>
+    <section role="status" ng-show="notification.status" ng-click="hideNotify()"> <p ng-bind-html-unsafe="notification.message"></p> </section>
+
+    <section data-type="sidebar">
+    <header>
+    <menu type="toolbar">
+      <a href="#"><span class="icon icon-home" ng-click="changeGroup()">home</span></a>
+    </menu>
+    <h1>Change Group</h1>
+    </header>
+    <nav>
+    <ul>
+      <li ng-repeat="(num,group) in schedule" ng-click="changeGroup(num)" ng-class="{'active': num == currentGroupNumber}"> 
+      <a href="#">Group {{num}}</a> 
+      </li>
+    </ul>
+    </nav>
+    <div role="toolbar"> 
+      <a href="#">
+        <div id="defaultGroup" ng-click="setDefaultGroup()">
+          Set current as Default Group 
+        </div>
+      </a>
+    </div>
+    </section>
+    <section id="drawer" role="region">
+    <header class="fixed">
+    <a href="#"><span class="icon icon-menu">hide sidebar</span></a>
+    <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+    <h1>Timings - Group {{currentGroupNumber}}  </h1>
+    </header>
+    <article class="content scrollable header">
+    <div role="main">
+      <section data-type="list">
+      <div class="status"> LoadShedding Status : {{status}} </div>
+      <ul>
+        <li ng-repeat="(num,times) in current" ng-class="{'today': num == currentTime.day}">
+        <div class="day"><strong>{{times.day}}</strong></div>
+        <div class="times"> <span ng-repeat="time in times.timing"> {{time[0].formatted}} - {{time[1].formatted}} <br  /></span></div>
+        </li>
+      </ul>
+      </section>
+      <!--div id="clock">
+      <div id="dot"></div>
+      <div id="hour" style="transform:rotate({{(currentTime.hours * 30) - 90}}deg);"></div>
+      <div id="minute" style="transform:rotate({{(currentTime.minutes * 6) - 90}}deg);"></div>
+      <div id="second" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);"></div>
+      <div class="shedding" style="transform:rotate({{(currentTime.seconds * 6) - 90}}deg);">
+        <div class="clip" style=""></div>
+      </div>
+      </div-->
+    </div>
+    </article>
+    </section>
 
 
-	</body>
+  </body>
 </html>
