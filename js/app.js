@@ -1,5 +1,5 @@
-var url = 'http://dl.dropboxusercontent.com/u/60336235/NLS/NLS.html';
-//var url = 'http://losh-timing.ap01.aws.af.cm/';
+//var url = 'http://dl.dropboxusercontent.com/u/60336235/NLS/NLS.html';
+var url = 'http://digital-lover.net:11477/getLoadSheddingSchedule';
 
 function mainCtrl($scope,$rootScope,$http,$timeout){
 	
